@@ -1,6 +1,6 @@
 # Episode 02-statistics: Is this Data Science?
 
-**Use metaflow to load the movie metadata CSV file into a data frame and compute some movie genre specific statistics. These statistics are then used in
+**Use metaflow to load the movie metadata CSV file into a data frame and compute some movie genre-specific statistics. These statistics are then used in
 later examples to improve our playlist generator. You can optionally use the
 Metaflow client to eyeball the results in a Markdown Notebook, and make some simple
 plots.**
@@ -10,7 +10,7 @@ plots.**
 - Plotting results in a Markdown Notebook.
 
 #### Before playing this episode:
-1. Configure your metadata provider to a user-wise global provider, if you haven't done it already. 
+1. Configure your metadata provider to a user-wise global provider, if you haven't done it already.
 ```bash
 $mkdir -p /path/to/home/.metaflow
 $export METAFLOW_DEFAULT_METADATA=local

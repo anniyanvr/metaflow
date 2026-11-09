@@ -29,7 +29,7 @@ Concurrency is practically never needed during the first two phases.
 
 We divide the concurrency constructs into two categories: Primary and
 Secondary. Whenever possible, you should prefer the constructs in
-the first category. The patterns are well established and they have
+the first category. The patterns are well established and have
 been used successfully in the core Metaflow modules, `runtime.py`
 and `task.py`. The constructs in the second category can be used in
 subprocesses, outside the core code paths in `runtime.py` and `task.py`.
@@ -80,7 +80,7 @@ Set the environment variable `METAFLOW_DEBUG_SUBCOMMAND=1` to see the
 exact command line that is used to launch a subcommand task. You can
 re-execute the task simply by re-executing the command line manually.
 However, be careful when re-executing commands from real runs, as you
-will rewrite data in the datastore. To be safe, preferably rerun only 
+will rewrite data in the datastore. To be safe, preferably rerun only
 commands executed with `--datastore=local` and `--metadata=local`.
 
 You can observe running subprocesses with `ps` and attach to them using
@@ -109,7 +109,7 @@ delay, to avoid the parent from blocking.
 
 The sidecar subprocess may die for various reasons, in which case
 messages sent to it by the parent may be lost. To keep communication
-essentially non-blocking and fast, there is no blocking acklowdgement of
+essentially non-blocking and fast, there is no blocking acknowledgement of
 successful message processing by the sidecar. Hence the communication is
 lossy. In this sense, communication with a sidecar is more akin to UDP
 than TCP.
@@ -118,9 +118,9 @@ than TCP.
 
 We send heart beats to metadata service in a sidecar, `heartbeat.py` to
 detect whether the task is alive. Since heart beats are purely informational,
-we didn't want to increase the latency of the main process due to these 
-service calls, nor we wanted to fail the whole parent process in case of a 
-request failing. A sidecar that handles communication with the metadata 
+we didn't want to increase the latency of the main process due to these
+service calls, nor we wanted to fail the whole parent process in case of a
+request failing. A sidecar that handles communication with the metadata
 service was a perfect solution.
 
 #### How to Observe
@@ -139,7 +139,7 @@ Use a sidecar if you need a task that runs during scheduling or
 execution of user code. A sidecar task can not perform any critical
 operations that must succeed in order for a task or a run to be
 considered valid. This makes sidecars suitable only for opportunistic,
-best effort tasks.
+best-effort tasks.
 
 ### 3. Data Parallelism
 
@@ -206,8 +206,8 @@ tasks is very easy and practically zero-cost.
 
 #### Example Uses
 
-Many sidecars, e.g. `heartbeat.py`, use a separate worker thread to make 
-sure that the main process consuming messages from the parent will not 
+Many sidecars, e.g. `heartbeat.py`, use a separate worker thread to make
+sure that the main process consuming messages from the parent will not
 block for an extended amount of time.
 
 ### 5. Multiprocessing
@@ -327,4 +327,3 @@ Async                 no             yes             yes            no
    partially isolated from the parent which makes `parallel_map` a bad
    candidate for execution of arbitrary code.
 7. Values returned by `parallel_map` need to be picklable.
-
